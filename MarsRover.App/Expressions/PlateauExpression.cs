@@ -17,13 +17,30 @@ namespace MarsRover.App.Expressions
 
             if (match.Success)
             {
-                X = int.Parse(match.Groups[1].Value);
-                Y = int.Parse(match.Groups[2].Value);
+                if (int.TryParse(match.Groups[1].Value, out var x))
+                {
+                    X = x;
+                }
+                else
+                {
+                    Console.WriteLine("Plateau X size is not valid");
+                    return false;
+                }
+
+                if (int.TryParse(match.Groups[2].Value, out var y))
+                {
+                    Y = y;
+                }
+                else
+                {
+                    Console.WriteLine("Plateau Y size is not valid");
+                    return false;
+                }
+
                 return true;
             }
-            else 
+            else
             {
-                Console.WriteLine("Plateau size is not valid");
                 return false;
             }
         }

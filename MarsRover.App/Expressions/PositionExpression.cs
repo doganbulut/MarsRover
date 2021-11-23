@@ -21,8 +21,27 @@ namespace MarsRover.App.Expressions
 
             if (match.Success)
             {
-                X = int.Parse(match.Groups[1].Value);
-                Y = int.Parse(match.Groups[2].Value);
+                if (int.TryParse(match.Groups[1].Value, out var x))
+                {
+                    X = x;
+                }
+                else
+                {
+                    Console.WriteLine("Rover X position is not valid!");
+                    return false;
+                }
+
+
+                if (int.TryParse(match.Groups[2].Value, out var y))
+                {
+                    Y = y;
+                }
+                else
+                {
+                    Console.WriteLine("Rover X position is not valid!");
+                    return false;
+                }
+
                 D = (CompassDirections)Enum.Parse(typeof(CompassDirections), match.Groups[3].Value);
 
                 return true;
